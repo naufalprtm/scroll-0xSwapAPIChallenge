@@ -16,15 +16,14 @@ Before running the scripts, ensure you have the following installed:
 
 ## Installation
 1. Clone the repository:
-    ```
-    git clone https://github.com/naufalprtm/scroll-0xSwapAPIChallenge.git
-    cd scroll-0xSwapAPIChallenge
-    ```
+
+        git clone https://github.com/naufalprtm/scroll-0xSwapAPIChallenge.git
+        cd scroll-0xSwapAPIChallenge
+
 
 2. Install dependencies:
-    ```
-    npm install
-    ```
+
+        npm install
 
 3. Set up environment variables:
     Create a `.env` file in the root of the project and fill it with the following keys:
@@ -43,9 +42,7 @@ Before running the scripts, ensure you have the following installed:
 
 You can run all the scripts in sequence using the following command:
 
-    ```
-npx hardhat run test.mjs
-    ```
+    npx hardhat run test.mjs
 
 
 # The following scripts are executed:
@@ -56,42 +53,42 @@ npx hardhat run test.mjs
 - `Monetization:` Implements the monetization logic for your app.
 
 # Example Output
-    ```
-Script Name                         | Status    | Time (ms)
------------------------------------------------------------------
-Swap Liquidity Breakdown            | Success | 1599
-Token Tax Info                      | Success | 1102
-Liquidity Sources                   | Success | 225
-Monetization Script                 | Success | 1009
 
-Fetch Liquidity Sources: Success | Time: 225 ms
-Available Liquidity Sources:
-  1. 0x
-  2. Aave_V2
-  3. Balancer
-  4. Balancer_V2
-  5. BancorV3
-  6. Compound
-  7. CryptoCom
-  8. Curve
-  9. Curve_V2
-  10. DODO
-  11. DODO_V2
-  12. KyberDMM
-  13. KyberElastic
-  14. Lido
-  15. MakerPsm
-  16. MultiHop
-  17. PancakeSwap_V3
-  18. ShibaSwap
-  19. SushiSwap
-  20. Synapse
-  21. Uniswap
-  22. Uniswap_V2
-  23. Uniswap_V3
+    Script Name                         | Status    | Time (ms)
+    -----------------------------------------------------------------
+    Swap Liquidity Breakdown            | Success | 1599
+    Token Tax Info                      | Success | 1102
+    Liquidity Sources                   | Success | 225
+    Monetization Script                 | Success | 1009
 
-Buy Token Info: 0xf610a9dfb7c89644979b4a0f27063e9e7d7cda32
-Sell Token Info: 0x5300000000000000000000000000000000000004
-Detected 1 sources:
-  Source 1: Nuri_CL, Proportion: 100.00%
-    ```
+    Fetch Liquidity Sources: Success | Time: 225 ms
+    Available Liquidity Sources:
+      1. 0x
+      2. Aave_V2
+      3. Balancer
+      4. Balancer_V2
+      5. BancorV3
+      6. Compound
+      7. CryptoCom
+      8. Curve
+      9. Curve_V2
+      10. DODO
+      11. DODO_V2
+      12. KyberDMM
+      13. KyberElastic
+      14. Lido
+      15. MakerPsm
+      16. MultiHop
+      17. PancakeSwap_V3
+      18. ShibaSwap
+      19. SushiSwap
+      20. Synapse
+      21. Uniswap
+      22. Uniswap_V2
+      23. Uniswap_V3
+
+    Buy Token Info: 0xf610a9dfb7c89644979b4a0f27063e9e7d7cda32
+    Sell Token Info: 0x5300000000000000000000000000000000000004
+    Detected 1 sources:
+      Source 1: Nuri_CL, Proportion: 100.00%
+  
