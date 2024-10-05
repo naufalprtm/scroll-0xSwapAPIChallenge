@@ -39,24 +39,21 @@ async function fetchLiquiditySources() {
         console.log(chalk.green('API response status:'), response.status);
         console.log(chalk.green('Raw response data:'), JSON.stringify(response.data, null, 2));
 
-        // Check if sources are present and valid
-        const sources = response.data.sources || []; // Default to an empty array if not found
-        if (Array.isArray(sources) && sources.length > 0) {
-            console.log(chalk.blue(`${sources.length} liquidity sources detected...`));
-            const liquiditySourcesDetails = sources.map((source, index) => ({
-                name: source.name || `Source ${index + 1}`,
-                proportionBps: source.proportionBps || 0, // Default to 0 if undefined
-            }));
-
-            // Log each liquidity source's name and proportion
-            liquiditySourcesDetails.forEach((source, index) => {
-                console.log(chalk.green(`Source ${index + 1}: Name: ${source.name}, Proportion: ${source.proportionBps} bps`));
+        // Check if records are present and valid
+        const records = response.data.records || []; // Default to an empty array if not found
+        if (Array.isArray(records) && records.length > 0) {
+            console.log(chalk.blue(`${records.length} liquidity sources detected...`));
+            
+            // Log each liquidity source's name
+            records.forEach((source, index) => {
+                console.log(chalk.green(`Source ${index + 1}: ${source}`));
             });
+
             console.log(chalk.blue('=== fetchLiquiditySources completed successfully ==='));
-            return liquiditySourcesDetails; // Return details for further processing
+            return records; // Return records for further processing
         } else {
-            console.warn(chalk.red('No liquidity sources found or sources is not an array.'));
-            return []; // Return an empty array if no sources are found
+            console.warn(chalk.red('No liquidity sources found or records is not an array.'));
+            return []; // Return an empty array if no records are found
         }
 
     } catch (error) {

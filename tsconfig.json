@@ -24,6 +24,6 @@
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
   },
-  "include": ["scripts", "test", "hardhat.config.cjs"],
+  "include": ["scripts", "test", "hardhat.config.ms"],
   "exclude": ["node_modules"]
 }

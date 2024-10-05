@@ -12,26 +12,32 @@ async function runAllScripts() {
 
     let liquiditySourcesDetails = [];
     let tokenInfo = {};
+    let swapSources = [];
 
     try {
+        // Swap Liquidity Breakdown
         const startSwap = Date.now();
         console.log(chalk.cyan('--- Running Swap Liquidity Breakdown ---'));
-        await fetchSwapQuote();
+        const swapQuoteData = await fetchSwapQuote(); // Fetch swap data including sources
+        swapSources = swapQuoteData.sources; // Extract sources from swap response
         const swapTime = Date.now() - startSwap;
         results.push({ script: 'Swap Liquidity Breakdown', success: true, time: swapTime });
 
+        // Token Tax Info
         const startTaxInfo = Date.now();
         console.log(chalk.cyan('--- Running Token Tax Info ---'));
         tokenInfo = await fetchTokenTaxInfo(); // Modify fetchTokenTaxInfo to return relevant data
         const taxInfoTime = Date.now() - startTaxInfo;
         results.push({ script: 'Token Tax Info', success: true, time: taxInfoTime });
 
+        // Liquidity Sources
         const startLiquiditySources = Date.now();
         console.log(chalk.cyan('--- Running Liquidity Sources ---'));
-        liquiditySourcesDetails = await fetchLiquiditySources(); // Modify fetchLiquiditySources to return relevant data
+        liquiditySourcesDetails = await fetchLiquiditySources(); // Fetch liquidity sources data
         const liquiditySourcesTime = Date.now() - startLiquiditySources;
         results.push({ script: 'Liquidity Sources', success: true, time: liquiditySourcesTime });
 
+        // Monetization Script
         const startMonetization = Date.now();
         console.log(chalk.cyan('--- Running Monetization Script ---'));
         await monetizeApp();
@@ -63,6 +69,16 @@ async function runAllScripts() {
             console.log(chalk.white(`${paddedScriptName} | ${paddedStatus} | ${paddedTime}`));
         });
 
+        // Display Swap Sources details
+        if (swapSources.length > 0) {
+            console.log(chalk.white(`\nSwap Sources: ${swapSources.length} sources detected:`));
+            swapSources.forEach((source, index) => {
+                console.log(chalk.white(`  Source ${index + 1}: ${source.name}, Proportion: ${source.proportion}`));
+            });
+        } else {
+            console.log(chalk.yellow('No swap sources detected.'));
+        }
+
         // Highlighting fetchLiquiditySources and token info specifically
         const liquidityResult = results.find(r => r.script === 'Liquidity Sources');
         if (liquidityResult) {
@@ -79,6 +95,16 @@ async function runAllScripts() {
         }
         if (tokenInfo.sellToken) {
             console.log(chalk.white(`Sell Token Info: ${tokenInfo.sellToken}`));
+        }
+
+        // Display specific source information at the very bottom
+        if (swapSources.length > 0) {
+            console.log(chalk.green(`\nDetected ${swapSources.length} sources:`));
+            swapSources.forEach((source, index) => {
+                console.log(chalk.green(`  Source ${index + 1}: ${source.name}, Proportion: ${source.proportion}`));
+            });
+        } else {
+            console.log(chalk.yellow('No swap sources detected.'));
         }
     }
 }
