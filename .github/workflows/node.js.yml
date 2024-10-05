@@ -25,25 +25,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Load environment variables
-        run: |
-          echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
-          echo "WALLET_ADDRESS=${{ secrets.WALLET_ADDRESS }}" >> $GITHUB_ENV
-          echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> $GITHUB_ENV
-          echo "SCROLL_CHAIN_ID=${{ secrets.SCROLL_CHAIN_ID }}" >> $GITHUB_ENV
-          echo "BUY_TOKEN_PERCENTAGE_FEE=${{ secrets.BUY_TOKEN_PERCENTAGE_FEE }}" >> $GITHUB_ENV
-          echo "SELL_TOKEN=${{ secrets.SELL_TOKEN }}" >> $GITHUB_ENV
-          echo "BUY_TOKEN=${{ secrets.BUY_TOKEN }}" >> $GITHUB_ENV
-          echo "SELL_AMOUNT=${{ secrets.SELL_AMOUNT }}" >> $GITHUB_ENV
-
       - name: Start test.mjs
         env:
-          API_KEY: ${{ secrets.API_KEY }}
-          WALLET_ADDRESS: ${{ secrets.WALLET_ADDRESS }}
-          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-          SCROLL_CHAIN_ID: ${{ secrets.SCROLL_CHAIN_ID }}
-          BUY_TOKEN_PERCENTAGE_FEE: ${{ secrets.BUY_TOKEN_PERCENTAGE_FEE }}
-          SELL_TOKEN: ${{ secrets.SELL_TOKEN }}
-          BUY_TOKEN: ${{ secrets.BUY_TOKEN }}
-          SELL_AMOUNT: ${{ secrets.SELL_AMOUNT }}
+          WALLET_ADDRESS: 0x8960E91046A36D8b5F5f7aeC99Bf3856CE96A86b
+          PRIVATE_KEY: 0000000000000000000000000000000000000000000000000000000000000001
+          SCROLL_CHAIN_ID: 534352
+          BUY_TOKEN_PERCENTAGE_FEE: 10
+          SELL_TOKEN: 0x5300000000000000000000000000000000000004
+          BUY_TOKEN: 0xf610A9dfB7C89644979b4A0f27063E9e7d7Cda32
+          SELL_AMOUNT: 100000000000000000000
         run: npx hardhat run test.mjs
