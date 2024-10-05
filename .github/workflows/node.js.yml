@@ -1,7 +1,3 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them,
-# build the source code and run tests across different versions of node.
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
-
 name: 0xSwapAPIChallenge CI
 
 on:
@@ -12,24 +8,33 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [22.x]
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Start test.mjs
-      run: npx hardhat run test.mjs
+      - name: Load environment variables
+        run: |
+          echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+          echo "WALLET_ADDRESS=${{ secrets.WALLET_ADDRESS }}" >> $GITHUB_ENV
+          echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> $GITHUB_ENV
+          echo "SCROLL_CHAIN_ID=${{ secrets.SCROLL_CHAIN_ID }}" >> $GITHUB_ENV
+          echo "BUY_TOKEN_PERCENTAGE_FEE=${{ secrets.BUY_TOKEN_PERCENTAGE_FEE }}" >> $GITHUB_ENV
+          echo "SELL_TOKEN=${{ secrets.SELL_TOKEN }}" >> $GITHUB_ENV
+          echo "BUY_TOKEN=${{ secrets.BUY_TOKEN }}" >> $GITHUB_ENV
+          echo "SELL_AMOUNT=${{ secrets.SELL_AMOUNT }}" >> $GITHUB_ENV
+
+      - name: Start test.mjs
+        run: npx hardhat run test.mjs
