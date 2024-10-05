@@ -25,5 +25,25 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Load environment variables
+        run: |
+          echo "API_KEY=${{ secrets.API_KEY }}" >> $GITHUB_ENV
+          echo "WALLET_ADDRESS=${{ secrets.WALLET_ADDRESS }}" >> $GITHUB_ENV
+          echo "PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}" >> $GITHUB_ENV
+          echo "SCROLL_CHAIN_ID=${{ secrets.SCROLL_CHAIN_ID }}" >> $GITHUB_ENV
+          echo "BUY_TOKEN_PERCENTAGE_FEE=${{ secrets.BUY_TOKEN_PERCENTAGE_FEE }}" >> $GITHUB_ENV
+          echo "SELL_TOKEN=${{ secrets.SELL_TOKEN }}" >> $GITHUB_ENV
+          echo "BUY_TOKEN=${{ secrets.BUY_TOKEN }}" >> $GITHUB_ENV
+          echo "SELL_AMOUNT=${{ secrets.SELL_AMOUNT }}" >> $GITHUB_ENV
+
       - name: Start test.mjs
         run: npx hardhat run test.mjs
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          WALLET_ADDRESS: ${{ secrets.WALLET_ADDRESS }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          SCROLL_CHAIN_ID: ${{ secrets.SCROLL_CHAIN_ID }}
+          BUY_TOKEN_PERCENTAGE_FEE: ${{ secrets.BUY_TOKEN_PERCENTAGE_FEE }}
+          SELL_TOKEN: ${{ secrets.SELL_TOKEN }}
+          BUY_TOKEN: ${{ secrets.BUY_TOKEN }}
+          SELL_AMOUNT: ${{ secrets.SELL_AMOUNT }}
